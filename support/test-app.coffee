@@ -6,6 +6,7 @@ ViewReactor.init({views_path: path.join(__dirname, 'views'), base_uri: '/_views'
 app = new Express()
 
 app.engine('js', ViewReactor.Engine())
+app.engine('coffee', ViewReactor.Engine())
 app.set('view engine', 'view-reactor')
 app.set('views', path.join(__dirname, 'views'))
 
@@ -13,6 +14,9 @@ app.use ViewReactor.Middleware()
 
 app.get '/', (req,res) ->
   res.render('index.js', {title: 'View Reactor Test-App', name: 'bob'})
+
+app.get '/coffee', (req,res) ->
+  res.render('index.coffee', {title: 'View Reactor Test-App', name: 'dave'})
 
 app.listen 3000, ->
   console.log 'listening on port 3000'
