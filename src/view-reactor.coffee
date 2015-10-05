@@ -8,9 +8,13 @@ webpack = require 'webpack'
 module.exports =
   default_config:
     template: './template'
+    babel: false
 
   init: (config) ->
     @config = assign(@default_config, config)
+
+    if @config.babel
+      require('babel/register')
 
   clientFunctions: ->
     container = document.querySelector('#app')
@@ -61,6 +65,13 @@ module.exports =
               },
               externals:{
                 'react': 'React'
+              }
+              module: {
+                loaders: [
+                  { test: /\.coffee$/, loader: "coffee-loader" },
+                  { test: /\.(coffee\.md|litcoffee)$/, loader: "coffee-loader?literate" }
+                  { test: /\.js?$/, exclude: /(node_modules|bower_components)/, loader: 'babel' }
+                ]
               }
           }, (err, stats) ->
             next(err) if err
