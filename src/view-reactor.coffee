@@ -62,6 +62,12 @@ module.exports =
               externals:{
                 'react': 'React'
               }
+              module: {
+                loaders: [
+                  { test: /\.coffee$/, loader: "coffee-loader" },
+                  { test: /\.(coffee\.md|litcoffee)$/, loader: "coffee-loader?literate" }
+                ]
+              }
           }, (err, stats) ->
             next(err) if err
 

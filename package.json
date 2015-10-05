@@ -46,5 +46,8 @@
   "dependencies": {
     "object-assign": "^4.0.1",
     "webpack": "^1.12.2"
+  },
+  "optionalDependencies": {
+    "coffee-loader": "^0.7.2"
   }
 }
