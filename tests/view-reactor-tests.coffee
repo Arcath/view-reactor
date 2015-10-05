@@ -9,7 +9,10 @@ app.get '/', (req, res) ->
   res.render('index.js', {title: 'foo'})
 
 app.get '/coffee', (req, res) ->
-  res.render('coffee-view.coffee', {title: 'bar'})
+  res.render('index.coffee', {title: 'bar'})
+
+app.get '/jsx', (req, res) ->
+  res.render('index.jsx', {title: 'widget'})
 
 ViewReactor = require '../src/view-reactor'
 ViewReactor.init({views_path: path.join(__dirname, '..', 'support', 'views'), base_uri: '/_views'})
@@ -52,8 +55,14 @@ describe 'ViewReactor', ->
       .expect(200)
       .expect(/component/, done)
 
-  it 'should support views not written in plain javascript', (done) ->
+  it 'should support views written in coffee script', (done) ->
     request(app)
       .get('/_views/index.coffee')
+      .expect(200)
+      .expect(/component/, done)
+
+  it 'should support views written in jax', (done) ->
+    request(app)
+      .get('/_views/index.jsx')
       .expect(200)
       .expect(/component/, done)
