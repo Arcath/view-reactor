@@ -15,7 +15,7 @@ app.get '/jsx', (req, res) ->
   res.render('index.jsx', {title: 'widget'})
 
 ViewReactor = require '../src/view-reactor'
-ViewReactor.init({views_path: path.join(__dirname, '..', 'support', 'views'), base_uri: '/_views'})
+ViewReactor.init({views_path: path.join(__dirname, '..', 'support', 'views'), base_uri: '/_views', babel: true})
 
 describe 'ViewReactor', ->
   it 'should provide a view engine', ->
@@ -61,7 +61,7 @@ describe 'ViewReactor', ->
       .expect(200)
       .expect(/component/, done)
 
-  it 'should support views written in jax', (done) ->
+  it 'should support views written in jsx', (done) ->
     request(app)
       .get('/_views/index.jsx')
       .expect(200)

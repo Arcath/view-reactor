@@ -1,7 +1,7 @@
 Express = require 'express'
 path = require 'path'
 ViewReactor = require '../src/view-reactor'
-ViewReactor.init({views_path: path.join(__dirname, 'views'), base_uri: '/_views', reactURL: "https://fb.me/react-0.13.3.js"})
+ViewReactor.init({views_path: path.join(__dirname, 'views'), base_uri: '/_views', reactURL: "https://fb.me/react-0.13.3.js", babel: true})
 
 app = new Express()
 
@@ -17,6 +17,9 @@ app.get '/', (req,res) ->
 
 app.get '/coffee', (req,res) ->
   res.render('index.coffee', {title: 'View Reactor Test-App', name: 'dave'})
+
+app.get '/jsx', (req,res) ->
+  res.render('index-jsx.js', {title: 'View Reactor Test-App', name: 'phillip'})
 
 app.listen 3000, ->
   console.log 'listening on port 3000'
